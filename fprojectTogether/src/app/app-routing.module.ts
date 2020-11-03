@@ -32,9 +32,18 @@ import {RoomListComponent} from './rooms/components/room-list/room-list.componen
 import {RoomtypeEditComponent} from './roomTypes/components/roomtype-edit/roomtype-edit.component';
 import {RoomEditComponent} from './rooms/components/room-edit/room-edit.component';
 import {RoomtypeAddComponent} from './roomTypes/components/roomtype-add/roomtype-add.component';
+import {UserListComponent} from './users/components/user-list/user-list.component';
+import {RegisterComponent} from './users/components/register/register.component';
+import {UserEditComponent} from './users/components/user-edit/user-edit.component';
+import {LoginComponent} from './users/components/login/login.component';
 
 
-const routes: Routes = [{path: 'continent', component: ContinentListComponent},
+const routes: Routes = [
+  {path: 'getUsers', component: UserListComponent},
+  {path: '', component: LoginComponent},
+  {path: 'editUser/:id', component: UserEditComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'continent', component: ContinentListComponent},
   {path: 'addContinent', component: ContinentAddComponent},
   {path: 'editContinent/:id', component: ContinentEditComponent },
   {path: 'countries', component: CountryListComponent},

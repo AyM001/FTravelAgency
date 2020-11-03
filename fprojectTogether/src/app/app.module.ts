@@ -4,7 +4,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ContinentListComponent} from './continents/components/continent-list/continent-list.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ContinentAddComponent } from './continents/components/continent-add/continent-add.component';
 import {ContinentEditComponent} from './continents/components/continent-edit/continent-edit.component';
@@ -59,6 +59,12 @@ import {PhotosService} from './hotels/service/photos.service';
 import {RoomTypeService} from './roomTypes/services/room-type.service';
 import {TripService} from './trips/service/trip.service';
 import {NgImageSliderModule} from 'ng-image-slider';
+import { UserListComponent } from './users/components/user-list/user-list.component';
+import { RegisterComponent } from './users/components/register/register.component';
+import {UserServiceService} from './users/service/user-service.service';
+import { UserEditComponent } from './users/components/user-edit/user-edit.component';
+import { LoginComponent } from './users/components/login/login.component';
+import {HttpInterceptorService} from './users/service/http-interceptor.service';
 
 
 
@@ -100,6 +106,10 @@ import {NgImageSliderModule} from 'ng-image-slider';
     RoomAddComponent,
     RoomEditComponent,
     HotelViewComponent,
+    UserListComponent,
+    RegisterComponent,
+    UserEditComponent,
+    LoginComponent,
   ],
     imports: [
         BrowserModule,
@@ -118,7 +128,12 @@ import {NgImageSliderModule} from 'ng-image-slider';
 
     ],
   providers: [HotelService , RoomService , AirportService , CityService, CountryService , FlightService
-   , ParticipantService ,  PhotoService , PhotosService , RoomTypeService , TripService ],
+   , ParticipantService ,  PhotoService , PhotosService , RoomTypeService , TripService , UserServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
