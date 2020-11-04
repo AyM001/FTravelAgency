@@ -36,6 +36,7 @@ import {UserListComponent} from './users/components/user-list/user-list.componen
 import {RegisterComponent} from './users/components/register/register.component';
 import {UserEditComponent} from './users/components/user-edit/user-edit.component';
 import {LoginComponent} from './users/components/login/login.component';
+import {MenuComponent} from './common/component/menu/menu.component';
 
 
 const routes: Routes = [
@@ -74,7 +75,8 @@ const routes: Routes = [
 {path: 'editRoomType/:id', component: RoomtypeEditComponent},
 {path: 'room', component: RoomListComponent},
 {path: 'addRoom', component: RoomAddComponent},
-{path: 'editRoom/:id', component: RoomEditComponent}
+{path: 'editRoom/:id', component: RoomEditComponent},
+{path: 'menu', component: MenuComponent}
   ];
 
 @NgModule({
