@@ -37,6 +37,10 @@ import {RegisterComponent} from './users/components/register/register.component'
 import {UserEditComponent} from './users/components/user-edit/user-edit.component';
 import {LoginComponent} from './users/components/login/login.component';
 import {MenuComponent} from './common/component/menu/menu.component';
+import {HotelViewComponent} from './hotels/components/hotel-view/hotel-view.component';
+import {HotelReserveComponent} from './hotels/components/hotel-reserve/hotel-reserve.component';
+import {FlightReserveComponent} from './flights/components/flight-reserve/flight-reserve.component';
+import {HotelsCustomerViewComponent} from './hotels/components/hotels-customer-view/hotels-customer-view.component';
 
 
 const routes: Routes = [
@@ -51,11 +55,15 @@ const routes: Routes = [
   {path: 'addCountry', component: CountryAddComponent},
   {path: 'editCountry/:id', component: CountryEditComponent},
   {path: 'hotels' , component: HotelListComponent},
+  {path: 'hotelsCust' , component: HotelsCustomerViewComponent},
   {path: 'flights' , component: FlightListComponent},
   {path: 'addHotel' , component: HotelFormComponent},
   {path: 'addFlight' , component: FlightFormComponent},
   {path: 'editHotel/:id' , component: HotelEditComponent},
   {path: 'editFlight/:id' , component: FlightEditComponent},
+  {path: 'viewHotel/:id' , component: HotelViewComponent},
+  {path: 'reserveHotel/:id' , component: HotelReserveComponent},
+  {path: 'reserveFlight/:id' , component: FlightReserveComponent},
   {path: 'participants', component: ParticipantListComponent },
   {path: 'addparticipant', component: ParticipantFormComponent},
   {path: 'editparticipant/:id', component: ParticipantEditComponent},

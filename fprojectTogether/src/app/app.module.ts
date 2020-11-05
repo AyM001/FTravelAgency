@@ -65,6 +65,9 @@ import {UserServiceService} from './users/service/user-service.service';
 import { UserEditComponent } from './users/components/user-edit/user-edit.component';
 import { LoginComponent } from './users/components/login/login.component';
 import {HttpInterceptorService} from './users/service/http-interceptor.service';
+import { HotelReserveComponent } from './hotels/components/hotel-reserve/hotel-reserve.component';
+import { FlightReserveComponent } from './flights/components/flight-reserve/flight-reserve.component';
+import { HotelsCustomerViewComponent } from './hotels/components/hotels-customer-view/hotels-customer-view.component';
 
 
 
@@ -110,6 +113,9 @@ import {HttpInterceptorService} from './users/service/http-interceptor.service';
     RegisterComponent,
     UserEditComponent,
     LoginComponent,
+    HotelReserveComponent,
+    FlightReserveComponent,
+    HotelsCustomerViewComponent,
   ],
     imports: [
         BrowserModule,
