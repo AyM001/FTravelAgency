@@ -41,6 +41,7 @@ import {HotelViewComponent} from './hotels/components/hotel-view/hotel-view.comp
 import {HotelReserveComponent} from './hotels/components/hotel-reserve/hotel-reserve.component';
 import {FlightReserveComponent} from './flights/components/flight-reserve/flight-reserve.component';
 import {HotelsCustomerViewComponent} from './hotels/components/hotels-customer-view/hotels-customer-view.component';
+import {FlightsCustomerComponent} from './flights/components/flights-customer/flights-customer.component';
 
 
 const routes: Routes = [
@@ -57,6 +58,7 @@ const routes: Routes = [
   {path: 'hotels' , component: HotelListComponent},
   {path: 'hotelsCust' , component: HotelsCustomerViewComponent},
   {path: 'flights' , component: FlightListComponent},
+  {path: 'flights/customers' , component: FlightsCustomerComponent},
   {path: 'addHotel' , component: HotelFormComponent},
   {path: 'addFlight' , component: FlightFormComponent},
   {path: 'editHotel/:id' , component: HotelEditComponent},
