@@ -6,7 +6,11 @@
       <tr>
         <th scope="col">#</th>
         <th class="align-middle" scope="col">Name</th>
-        <th class="align-middle" scope="col">Airport</th>
+        <th class="align-middle" scope="col">Departure City</th>
+        <th class="align-middle" scope="col">Departure airoport</th>
+        <th class="align-middle" scope="col">Arrival City</th>
+        <th class="align-middle" scope="col">Arrival airoport</th>
+        <th class="align-middle" scope="col">Vacancies</th>
 
         <th><button (click)="addFlight()" class="btn btn-success">Add+
         </button>
@@ -19,7 +23,11 @@
       <tr *ngFor="let flight of flights | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}" >
         <td>{{ (flights.indexOf(flight)+1)}}</td>
         <td>{{ flight.name }}</td>
-        <td>{{ flight.airportModel.name }}</td>
+        <td>{{ flight.airportDeparture.cityModel.name }}</td>
+        <td>{{ flight.airportDeparture.name }}</td>
+        <td>{{ flight.airportArrival.cityModel.name }}</td>
+        <td>{{ flight.airportArrival.name }}</td>
+        <td>{{ flight.vacancies}}</td>
 
 
         <td>

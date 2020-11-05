@@ -12,5 +12,6 @@ export class Flight {
   arriveHour: string;
   rowsNumber: number;
   seatsRowNumber: number;
-  airportModel: Airport;
+  airportDeparture: Airport;
+  airportArrival: Airport;
 }

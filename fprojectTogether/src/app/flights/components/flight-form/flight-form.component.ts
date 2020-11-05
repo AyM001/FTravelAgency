@@ -18,7 +18,8 @@ export class FlightFormComponent implements OnInit {
   flight: Flight;
   dropdownSettings: IDropdownSettings = {};
   airports: Airport[];
-  selectedAirports: Airport[];
+  selectedAirportsDep: Airport[];
+  selectedAirportsArr: Airport[];
   constructor(private flightService: FlightService,
               private airportService: AirportService,
               private router: Router,
@@ -28,7 +29,8 @@ export class FlightFormComponent implements OnInit {
   ngOnInit(): void {
     this.flight = new Flight();
     this.airports = [];
-    this.selectedAirports = [];
+    this.selectedAirportsDep = [];
+    this.selectedAirportsArr = [];
     this.airportService.findAll().subscribe(data => this.airports = data);
     this.dropdownSettings = {
       singleSelection: true,
@@ -42,7 +44,8 @@ export class FlightFormComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   onSubmit(){
-    this.flight.airportModel = this.selectedAirports[0];
+    this.flight.airportDeparture = this.selectedAirportsDep[0];
+    this.flight.airportArrival = this.selectedAirportsArr[0];
     this.flightService.save(this.flight).subscribe(result => this.goToFlightList());
   }
 
