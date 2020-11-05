@@ -6,9 +6,11 @@ export class Flight {
   id: number;
   name: string;
   vacancies: number;
-  departureDay: Date;
-  returnDay: Date;
-  departureHour: Time;
-  returnHour: Time;
+  departureDay: string;
+  returnDay: string;
+  departureHour: string;
+  arriveHour: string;
+  rowsNumber: number;
+  seatsRowNumber: number;
   airportModel: Airport;
 }
