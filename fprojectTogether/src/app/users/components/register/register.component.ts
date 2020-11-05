@@ -20,11 +20,11 @@ export class RegisterComponent{
 
   // tslint:disable-next-line:typedef
   onSubmit() {
-    this.userService.save(this.user).subscribe(result => this.goToUserList());
+    this.userService.save(this.user).subscribe(result => this.goToLogin());
   }
 
   // tslint:disable-next-line:typedef
-  goToUserList() {
-    this.router.navigate(['/getUsers']);
+  goToLogin() {
+    this.router.navigate(['']);
   }
 }

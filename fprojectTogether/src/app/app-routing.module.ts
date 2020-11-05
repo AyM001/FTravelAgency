@@ -42,10 +42,12 @@ import {HotelReserveComponent} from './hotels/components/hotel-reserve/hotel-res
 import {FlightReserveComponent} from './flights/components/flight-reserve/flight-reserve.component';
 import {HotelsCustomerViewComponent} from './hotels/components/hotels-customer-view/hotels-customer-view.component';
 import {FlightsCustomerComponent} from './flights/components/flights-customer/flights-customer.component';
+import {HomepageComponent} from './common/component/homepage/homepage.component';
 
 
 const routes: Routes = [
   {path: 'getUsers', component: UserListComponent},
+  {path: 'homepage', component: HomepageComponent},
   {path: '', component: LoginComponent},
   {path: 'editUser/:id', component: UserEditComponent},
   {path: 'register', component: RegisterComponent},
