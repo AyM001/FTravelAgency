@@ -13,6 +13,7 @@ import {RoomService} from '../../services/room.service';
 export class RoomListComponent implements OnInit {
   room: Room[];
   searchValue = '';
+  id: number;
 
   constructor(private roomService: RoomService,
               private route: ActivatedRoute,
@@ -21,19 +22,20 @@ export class RoomListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.params.id;
     this.getRoom();
   }
 
   // tslint:disable-next-line:typedef
   getRoom() {
-    this.roomService.findAll().subscribe(data => {
+    this.roomService.findAll(this.id).subscribe(data => {
       this.room = data;
     });
   }
 
   // tslint:disable-next-line:typedef
   addRoom() {
-    this.router.navigate(['addRoom']);
+    this.router.navigate(['addRooms/' + this.id]);
   }
 
   // tslint:disable-next-line:typedef
@@ -46,5 +48,11 @@ export class RoomListComponent implements OnInit {
     this.roomService.delete(id).subscribe(data => {
       this.getRoom();
     });
+  }
+  ifHasBalcony(room: Room): string {
+    if (room.roomTypeModel.hasbalcony) {
+      return 'yes';
+    }
+    return 'no';
   }
 }

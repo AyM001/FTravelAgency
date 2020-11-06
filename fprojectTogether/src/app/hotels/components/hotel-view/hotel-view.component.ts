@@ -68,8 +68,12 @@ export class HotelViewComponent implements OnInit {
     this.router.navigate(['/hotels']);
   }
   // tslint:disable-next-line:typedef
-  goToAddRooms(id: number){
-    this.router.navigate(['/addRoom/' + id]);
+  goToAddRooms(){
+    this.router.navigate(['/addRooms/' + this.id]);
+  }
+  // tslint:disable-next-line:typedef
+  goToReserve(){  // 'reserveHotel/:id'
+    this.router.navigate(['/reserveHotel/' + this.id]);
   }
 
 }

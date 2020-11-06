@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Hotel} from '../model/hotel';
+import {Reservationh} from '../model/reservationh';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,9 @@ export class HotelService {
   public getById(id: number): Observable<any>{
     return this.http.get(`${this.hotelsUrl}/${id}`);
   }
-
+  public getVacancies(id: number, res: Reservationh ): Observable<any>{
+    return this.http.get(`${this.hotelsUrl}/vacancies/${id}`);
+  }
   // tslint:disable-next-line:typedef
   public save(hotel: Hotel){
   return this.http.post<Hotel>(this.hotelsUrl , hotel);
@@ -36,5 +39,9 @@ export class HotelService {
   }
   getHotelphotos(id: number): Observable<any> {
     return this.http.get(`${this.hotelsUrl}/photos/${id}`);
+  }
+  // tslint:disable-next-line:typedef
+  public reserve(id: number, reservationh: Reservationh){
+    return this.http.post<Reservationh>(`http://localhost:8080/reserve/${id}` , reservationh);
   }
 }

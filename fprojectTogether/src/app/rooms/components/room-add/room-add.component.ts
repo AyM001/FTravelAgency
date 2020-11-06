@@ -13,10 +13,11 @@ import {RoomTypeService} from '../../../roomTypes/services/room-type.service';
   styleUrls: ['./room-add.component.css']
 })
 export class RoomAddComponent implements OnInit {
-  room: Room = new Room();
   dropdownSettings: IDropdownSettings = {};
   roomtypes: RoomType[];
   selectedRoomtypes: RoomType[] = [];
+  id: number;
+  numRooms: number;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -36,17 +37,17 @@ export class RoomAddComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+    this.id = this.route.snapshot.params.idH;
   }
 
 // tslint:disable-next-line:typedef
   getRoomList() {
-    this.router.navigate(['room']);
+    this.router.navigate(['room/' + this.id]);
   }
 
   // tslint:disable-next-line:typedef
   onSubmit() {
-    this.room.roomTypeModel = this.selectedRoomtypes[0];
-    this.roomService.save(this.room).subscribe(result => this.getRoomList());
+    this.roomService.save(this.selectedRoomtypes[0].id, this.id, this.numRooms).subscribe(result => this.getRoomList());
   }
   // tslint:disable-next-line:typedef
   onItemSelect(item: any) {
@@ -56,5 +57,11 @@ export class RoomAddComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onSelectAll(items: any) {
     console.log(items);
+  }
+  ifFormIsCompleted(): boolean{
+    if (this.selectedRoomtypes.length > 0 && this.numRooms !== null){
+      return true;
+    }
+    return false;
   }
 }

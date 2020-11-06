@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Hotel} from '../../model/hotel';
-import {Observable} from 'rxjs';
 import {HotelService} from '../../service/hotel.service';
 import {CityService} from '../../../cities/service/city.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Reservationh} from '../../model/reservationh';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-hotel-reserve',
@@ -14,57 +15,76 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class HotelReserveComponent implements OnInit {
   hotel: Hotel;
   id: number;
-  closeResult = '';  // componenta pt modalul de stergere
-  photos: Observable<any>;
+  reservation: Reservationh = new Reservationh();
+  hoveredDate: NgbDate | null = null;
+  fromDate: NgbDate;
+  toDate: NgbDate | null = null;
+  myGroup: FormGroup;
   constructor(private hotelService: HotelService,
               private cityService: CityService,
               private router: Router,
               private modalService: NgbModal,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private calendar: NgbCalendar,
+              public formatter: NgbDateParserFormatter) {  this.fromDate = calendar.getToday();
+                                                           this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params.id;
+    this.reservation = new Reservationh();
     this.hotel = new Hotel();
     this.hotelService.getById(this.id).subscribe(data => {
       this.hotel = new Hotel();
       this.hotel = data;
     });
-    this.photos = this.hotelService.getHotelphotos(this.id);
+    this.myGroup = new FormGroup({
+      startDate: new FormControl(),
+      endDate: new FormControl(),
+    });
   }
   // tslint:disable-next-line:typedef
-  deleteHotel(id: number){
-    this.hotelService.delete(id).subscribe(result => {
-      this.getHotels();
+  public onSubmit(){
+    this.reservation.checkInDate = this.fromDate.year + '-' + this.fromDate.month + '-' + (this.fromDate.day + 1);
+    this.reservation.checkOutDate = this.toDate.year + '-' + this.toDate.month + '-' + (this.toDate.day + 1);
+    console.log(this.reservation);
+    this.hotelService.reserve(this.id, this.reservation).subscribe(result => {
+      this.goToHotelList();
     });
+  }
+  // tslint:disable-next-line:typedef
+  goToHotelList(){
+    this.router.navigate(['/hotels']);
   }
 
   // tslint:disable-next-line:typedef
-  editHotel(id: number) {
-    this.router.navigate(['editHotel' , id]);
-  }
-  // tslint:disable-next-line:typedef
-  open(content, id) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-      this.deleteHotel(id);
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+      this.toDate = date;
     } else {
-      return `with: ${reason}`;
+      this.toDate = null;
+      this.fromDate = date;
     }
   }
 
   // tslint:disable-next-line:typedef
-  private getHotels() {
-    this.router.navigate(['/hotels']);
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
   }
 
+  // tslint:disable-next-line:typedef
+  isInside(date: NgbDate) {
+    return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  // tslint:disable-next-line:typedef
+  isRange(date: NgbDate) {
+    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
+  }
+
+  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+    const parsed = this.formatter.parse(input);
+    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+  }
 }

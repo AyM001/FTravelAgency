@@ -14,13 +14,13 @@ export class RoomService {
     this.roomUrl = 'http://localhost:8080/room';
   }
 
-  public findAll(): Observable<Room[]> {
-    return this.http.get<[Room]>(this.roomUrl);
+  public findAll(id: number): Observable<Room[]> {
+    return this.http.get<[Room]>(`${this.roomUrl}s/${id}`);
   }
 
   // tslint:disable-next-line:typedef
-  public save(room: Room) {
-    return this.http.post<Room>(this.roomUrl, room);
+  public save(idRt: number, idH: number, numRooms: number) {
+    return this.http.post<Room>(`${this.roomUrl}/${idRt}/${idH}/${numRooms}`, null);
   }
 
   // tslint:disable-next-line:typedef
