@@ -70,6 +70,7 @@ import { FlightReserveComponent } from './flights/components/flight-reserve/flig
 import { HotelsCustomerViewComponent } from './hotels/components/hotels-customer-view/hotels-customer-view.component';
 import { FlightsCustomerComponent } from './flights/components/flights-customer/flights-customer.component';
 import { HomepageComponent } from './common/component/homepage/homepage.component';
+import { HotelCustomerComponent } from './hotels/components/hotel-customer/hotel-customer.component';
 
 
 
@@ -120,6 +121,7 @@ import { HomepageComponent } from './common/component/homepage/homepage.componen
     HotelsCustomerViewComponent,
     FlightsCustomerComponent,
     HomepageComponent,
+    HotelCustomerComponent,
   ],
     imports: [
         BrowserModule,

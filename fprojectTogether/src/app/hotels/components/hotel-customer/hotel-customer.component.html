@@ -5,7 +5,7 @@
 
       <img src="https://files.123freevectors.com/wp-content/uploads/freevectorimage/looking-for-hotel-logo-template-free-vector-2040.jpg"
            width="50" height="50" class="d-inline-block align-top" alt="">
-       <div><p>{{hotel.name}}</p></div>
+      <div><p>{{hotel.name}}</p></div>
       <div class="btn-group">
         <button (click)="editHotel(hotel.id)" class="btn btn-outline-primary mx-1"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></button>
         <button (click)="open(content, hotel.id)" class="btn btn-outline-danger"><i class="fa fa-trash"  ></i>
@@ -37,3 +37,4 @@
     <button type="button" class="btn btn-danger" (click)="modal.close('Delete click')">Delete</button>
   </div>
 </ng-template>
+

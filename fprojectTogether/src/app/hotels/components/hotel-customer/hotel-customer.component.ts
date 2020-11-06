@@ -1,46 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import {Hotel} from '../../model/hotel';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs';
 import {HotelService} from '../../service/hotel.service';
+import {CityService} from '../../../cities/service/city.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PhotosService} from '../../service/photos.service';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-hotels-customer-view',
-  templateUrl: './hotels-customer-view.component.html',
-  styleUrls: ['./hotels-customer-view.component.css']
+  selector: 'app-hotel-customer',
+  templateUrl: './hotel-customer.component.html',
+  styleUrls: ['./hotel-customer.component.css']
 })
-export class HotelsCustomerViewComponent implements OnInit {
-
-  hotels: Hotel[];
+export class HotelCustomerComponent implements OnInit {
+  hotel: Hotel;
+  id: number;
   closeResult = '';  // componenta pt modalul de stergere
-  searchValue = ''; // componenta pt search
-  p = 1;            // pt paginare si urmatoarea la fel
-  numberOfItemsPerP = 9;
   photos: Observable<any>;
-  constructor(private hotelService: HotelService ,
-              private router: Router ,
-              private route: ActivatedRoute,
+  constructor(private hotelService: HotelService,
+              private cityService: CityService,
+              private router: Router,
               private modalService: NgbModal,
-              private photoService: PhotosService) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.hotels = [];
-    this.getHotels();
-  }
-
-  // tslint:disable-next-line:typedef
-  public getHotels() {
-    this.hotelService.findAll().subscribe(result => {
-      this.hotels = [];
-      this.hotels = result;
-      this.chargePhotos(this.hotels);
+    this.id = this.route.snapshot.params.id;
+    this.hotel = new Hotel();
+    this.hotelService.getById(this.id).subscribe(data => {
+      this.hotel = new Hotel();
+      this.hotel = data;
     });
-  }
-  // tslint:disable-next-line:typedef
-  addHotel() {
-    this.router.navigate(['/addHotel']);
+    this.photos = this.hotelService.getHotelphotos(this.id);
   }
   // tslint:disable-next-line:typedef
   deleteHotel(id: number){
@@ -72,15 +61,9 @@ export class HotelsCustomerViewComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  // tslint:disable-next-line:typedef
-  chargePhotos(hotels: Hotel[]){
-    for (const hotel of hotels){
-      hotel.photos = this.hotelService.getHotelphotos(hotel.id);
-    }
-  }
-  // tslint:disable-next-line:typedef
-  viewHotel(id: number){
-    this.router.navigate(['viewHotelC' , id]);
-  }
 
+  // tslint:disable-next-line:typedef
+  private getHotels() {
+    this.router.navigate(['/hotels']);
+  }
 }

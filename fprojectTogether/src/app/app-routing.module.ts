@@ -43,6 +43,7 @@ import {FlightReserveComponent} from './flights/components/flight-reserve/flight
 import {HotelsCustomerViewComponent} from './hotels/components/hotels-customer-view/hotels-customer-view.component';
 import {FlightsCustomerComponent} from './flights/components/flights-customer/flights-customer.component';
 import {HomepageComponent} from './common/component/homepage/homepage.component';
+import {HotelCustomerComponent} from './hotels/components/hotel-customer/hotel-customer.component';
 
 
 const routes: Routes = [
@@ -66,6 +67,7 @@ const routes: Routes = [
   {path: 'editHotel/:id' , component: HotelEditComponent},
   {path: 'editFlight/:id' , component: FlightEditComponent},
   {path: 'viewHotel/:id' , component: HotelViewComponent},
+  {path: 'viewHotelC/:id' , component: HotelCustomerComponent},
   {path: 'reserveHotel/:id' , component: HotelReserveComponent},
   {path: 'reserveFlight/:id' , component: FlightReserveComponent},
   {path: 'participants', component: ParticipantListComponent },
@@ -85,7 +87,7 @@ const routes: Routes = [
 {path: 'roomType', component: RoomtypeListComponent},
 {path: 'addRoomType', component: RoomtypeAddComponent},
 {path: 'editRoomType/:id', component: RoomtypeEditComponent},
-{path: 'room', component: RoomListComponent},
+{path: 'room/:id', component: RoomListComponent},
 {path: 'addRoom', component: RoomAddComponent},
 {path: 'editRoom/:id', component: RoomEditComponent},
 {path: 'menu', component: MenuComponent}
