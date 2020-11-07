@@ -26,7 +26,9 @@ export class HotelReserveComponent implements OnInit {
               private modalService: NgbModal,
               private route: ActivatedRoute,
               private calendar: NgbCalendar,
-              public formatter: NgbDateParserFormatter) {   }
+              public formatter: NgbDateParserFormatter) {
+    this.fromDate = calendar.getToday();
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params.id;
