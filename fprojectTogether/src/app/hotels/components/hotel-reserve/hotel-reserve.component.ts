@@ -16,9 +16,9 @@ export class HotelReserveComponent implements OnInit {
   hotel: Hotel;
   id: number;
   reservation: Reservationh = new Reservationh();
-  hoveredDate: NgbDate | null = null;
+  hoveredDate: NgbDate;
   fromDate: NgbDate;
-  toDate: NgbDate | null = null;
+  toDate: NgbDate;
   myGroup: FormGroup;
   constructor(private hotelService: HotelService,
               private cityService: CityService,
@@ -26,8 +26,7 @@ export class HotelReserveComponent implements OnInit {
               private modalService: NgbModal,
               private route: ActivatedRoute,
               private calendar: NgbCalendar,
-              public formatter: NgbDateParserFormatter) {  this.fromDate = calendar.getToday();
-                                                           this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);}
+              public formatter: NgbDateParserFormatter) {   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params.id;
@@ -46,14 +45,14 @@ export class HotelReserveComponent implements OnInit {
   public onSubmit(){
     this.reservation.checkInDate = this.fromDate.year + '-' + this.fromDate.month + '-' + (this.fromDate.day + 1);
     this.reservation.checkOutDate = this.toDate.year + '-' + this.toDate.month + '-' + (this.toDate.day + 1);
-    console.log(this.reservation);
-    this.hotelService.reserve(this.id, this.reservation).subscribe(result => {
+    this.hotelService.reserve(this.id, this.reservation.checkInDate, this.reservation.checkOutDate, this.reservation.personsNumber).
+    subscribe(result => {
       this.goToHotelList();
     });
   }
   // tslint:disable-next-line:typedef
   goToHotelList(){
-    this.router.navigate(['/hotels']);
+    this.router.navigate(['hotels']);
   }
 
   // tslint:disable-next-line:typedef

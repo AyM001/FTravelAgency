@@ -41,7 +41,7 @@ export class HotelService {
     return this.http.get(`${this.hotelsUrl}/photos/${id}`);
   }
   // tslint:disable-next-line:typedef
-  public reserve(id: number, reservationh: Reservationh){
-    return this.http.post<Reservationh>(`http://localhost:8080/reserve/${id}` , reservationh);
+  public reserve(id: number, dateIn: string, dateOut: string, numPers: number){
+    return this.http.post<Reservationh>(`http://localhost:8080/reserve/${id}/${dateIn}/${dateOut}/${numPers}`, null);
   }
 }
