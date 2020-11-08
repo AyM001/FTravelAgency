@@ -64,6 +64,6 @@ export class HotelCustomerComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   private getHotels() {
-    this.router.navigate(['/hotels']);
+    this.router.navigate(['/hotelsCust']);
   }
 }
