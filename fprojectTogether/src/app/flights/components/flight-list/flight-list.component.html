@@ -9,10 +9,13 @@
         <th class="align-middle" scope="col">Name</th>
         <th class="align-middle" scope="col">Departure City</th>
         <th class="align-middle" scope="col">Departure airoport</th>
+        <th class="align-middle" scope="col">Departure date</th>
+        <th class="align-middle" scope="col">Departure time</th>
         <th class="align-middle" scope="col">Arrival City</th>
         <th class="align-middle" scope="col">Arrival airoport</th>
+        <th class="align-middle" scope="col">Arrival date</th>
+        <th class="align-middle" scope="col">Arrival time</th>
         <th class="align-middle" scope="col">Vacancies</th>
-
         <th><button (click)="addFlight()" class="btn btn-success">Add+
         </button>
         </th>
@@ -26,8 +29,12 @@
         <td>{{ flight.name }}</td>
         <td>{{ flight.airportDeparture.cityModel.name }}</td>
         <td>{{ flight.airportDeparture.name }}</td>
+        <td>{{ flight.departureDay }}</td>
+        <td>{{ flight.departureHour }}</td>
+        <td>{{ flight.airportDeparture.name }}</td>
         <td>{{ flight.airportArrival.cityModel.name }}</td>
-        <td>{{ flight.airportArrival.name }}</td>
+        <td>{{ flight.returnDay }}</td>
+        <td>{{ flight.arriveHour }}</td>
         <td>{{ flight.vacancies}}</td>
 
 
