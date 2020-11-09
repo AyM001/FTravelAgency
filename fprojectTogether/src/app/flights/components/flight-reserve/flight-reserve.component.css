@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.seat {
+  float: left;
+  display: block;
+  margin: 5px;
+  background: #4CAF50;
+  width: 100px;
+  height: 140px;
+}
+
+.seat-select {
+  display: none;
+}
+
+.seat-select:checked+.seat {
+  background: #F44336;
+}
+/*
+alt test
+ */
+
+body {
+  font-family: Arial;
+  font-size: 11px;
+}
+#seatmap {
+  position: relative;
+}
+#seatmap table {
+  border-collapse: separate;
+  border-spacing: 3px;
+}
+
+
+#plane {
+  width: 800px;
+  height: auto;
+  background: #fff;
+  border: solid 1px #aaa;
+  border-radius: 80px 0 0 80px;
+  z-index: 1;
+}
+#plane .rows {
+  width: 30px;
+  float: left;
+  empty-cells: show;
+  margin-top: 8px;
+  margin-left: 30px;
+}
+#plane .rows td {
+  height: 16px;
+  text-align: right;
+}
+
+#cabin {
+  background-color: #dedede;
+  border: none;
+  border-left: double 3px #999;
+  width: 727px;
+  height: auto;
+  padding: 5px;
+  float: left;
+  margin-left: 0px;
+}
+
+#cabin td { width: 15px; height: 15px; border: solid 1px #666; border-radius: 7px 0 0 7px; text-align: center; cursor: pointer; }
+#cabin td.row              { background-color: transparent; border: none; font-weight: bold; padding-right: 7px; }
+#cabin td.seatAvailable    { background-color: #01B213; color: #fff; }
+#cabin td.seatUnavailable  { background-color: #aaa !important; color: #ddd !important; }
+#cabin td.ExtraPay         { background-color: navy; color: #fff !important; }
+#cabin td.LargeSeat        { width: 23px; }
+#cabin td.noSeatGalley     { background-color: transparent; border: none; width: 10px; height: 10px;  }
+#cabin td.noSeatStorage    { background-color: #aaa; }
+#cabin td.noSeatLavatory   { background-color: #aaa; }
+
+#cabin tr:first-child td.wingSeat { border-top: solid 2px #333; }
+#cabin tr:last-child td.wingSeat { border-bottom: solid 2px #333; }

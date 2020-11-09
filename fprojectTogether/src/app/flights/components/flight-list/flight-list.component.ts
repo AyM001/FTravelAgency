@@ -67,4 +67,8 @@ export class FlightListComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+  // tslint:disable-next-line:typedef
+  reserve(id: number){
+    this.router.navigate(['reserveFlight/' + id]);
+  }
 }
