@@ -1,6 +1,5 @@
-import {Time} from '@angular/common';
 import {Airport} from '../../airports/model/airport';
-
+import {Seat} from './seat';
 
 export class Flight {
   id: number;
@@ -14,4 +13,5 @@ export class Flight {
   seatsRowNumber: number;
   airportDeparture: Airport;
   airportArrival: Airport;
+  seats: Seat[];
 }

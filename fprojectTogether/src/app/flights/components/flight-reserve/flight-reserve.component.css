@@ -1,81 +1,198 @@
-* {
-  margin: 0;
-  padding: 0;
+body {
+  margin: 60px;
+  background: #111;
+}
+
+.theatre {
+  display: flex;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cinema-seats {
+  display: flex;
+}
+.seat {
+  cursor: pointer;
+}
+*:hover:before {
+   content: "";
+   position: absolute;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.5);
+   border-radius: 7px;
+ }
+
+.active {
+ }
+
+.active:before {
+   content: "";
+   position: absolute;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(255, 255, 255, 0.6);
+   border-radius: 7px;
+ }
+
+.overlay {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+}
+
+.cinema-row {
+  transform: skew(-15deg);
+  margin: 0 6px;
 }
 
 .seat {
-  float: left;
-  display: block;
-  margin: 5px;
-  background: #4CAF50;
-  width: 100px;
-  height: 140px;
+  width: 35px;
+  height: 50px;
+  border-radius: 7px;
+  background: linear-gradient(
+    to top,
+    #761818,
+    #761818,
+    #761818,
+    #761818,
+    #761818,
+    #b54041,
+    #f3686a
+  );
+  margin-bottom: 10px;
+  transform: skew(20deg);
+  margin-top: -32px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-.seat-select {
-  display: none;
+.row-2 {
+  transform: skew(-13deg);
 }
-
-.seat-select:checked+.seat {
-  background: #F44336;
-}
-/*
-alt test
- */
-
-body {
-  font-family: Arial;
-  font-size: 11px;
-}
-#seatmap {
-  position: relative;
-}
-#seatmap table {
-  border-collapse: separate;
-  border-spacing: 3px;
+.seat {
+  transform: skew(18deg);
 }
 
 
-#plane {
-  width: 800px;
-  height: auto;
-  background: #fff;
-  border: solid 1px #aaa;
-  border-radius: 80px 0 0 80px;
-  z-index: 1;
+.row-3 {
+  transform: skew(-12deg);
 }
-#plane .rows {
-  width: 30px;
-  float: left;
-  empty-cells: show;
-  margin-top: 8px;
-  margin-left: 30px;
-}
-#plane .rows td {
-  height: 16px;
-  text-align: right;
+.seat {
+  transform: skew(16deg);
 }
 
-#cabin {
-  background-color: #dedede;
-  border: none;
-  border-left: double 3px #999;
-  width: 727px;
-  height: auto;
-  padding: 5px;
-  float: left;
-  margin-left: 0px;
+
+.row-4 {
+  transform: skew(-11deg);
+}
+.seat {
+  transform: skew(15deg);
 }
 
-#cabin td { width: 15px; height: 15px; border: solid 1px #666; border-radius: 7px 0 0 7px; text-align: center; cursor: pointer; }
-#cabin td.row              { background-color: transparent; border: none; font-weight: bold; padding-right: 7px; }
-#cabin td.seatAvailable    { background-color: #01B213; color: #fff; }
-#cabin td.seatUnavailable  { background-color: #aaa !important; color: #ddd !important; }
-#cabin td.ExtraPay         { background-color: navy; color: #fff !important; }
-#cabin td.LargeSeat        { width: 23px; }
-#cabin td.noSeatGalley     { background-color: transparent; border: none; width: 10px; height: 10px;  }
-#cabin td.noSeatStorage    { background-color: #aaa; }
-#cabin td.noSeatLavatory   { background-color: #aaa; }
 
-#cabin tr:first-child td.wingSeat { border-top: solid 2px #333; }
-#cabin tr:last-child td.wingSeat { border-bottom: solid 2px #333; }
+.row-5 {
+  transform: skew(-10deg);
+}
+.seat {
+  transform: skew(12deg);
+}
+
+
+.row-6 {
+  transform: skew(-9deg);
+}
+.seat {
+  transform: skew(10deg);
+}
+
+
+.row-7 {
+  transform: skew(-7deg);
+}
+.seat {
+  transform: skew(8deg);
+}
+
+
+   .right {
+     margin-left: 70px;
+   }
+.cinema-row {
+  transform: skew(7deg);
+  margin: 0 6px;
+}
+
+.seat {
+  width: 35px;
+  height: 50px;
+  border-radius: 7px;
+  background: linear-gradient(
+    to top,
+    #761818,
+    #761818,
+    #761818,
+    #761818,
+    #761818,
+    #b54041,
+    #f3686a
+  );
+  margin-bottom: 10px;
+  transform: skew(-8deg);
+  margin-top: -32px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.row-2 {
+  transform: skew(9deg);
+}
+.seat {
+  transform: skew(-10deg);
+}
+
+
+.row-3 {
+  transform: skew(10deg);
+}
+.seat {
+  transform: skew(-12deg);
+}
+
+
+.row-4 {
+  transform: skew(11deg);
+}
+.seat {
+  transform: skew(-15deg);
+}
+
+
+.row-5 {
+  transform: skew(12deg);
+}
+.seat {
+  transform: skew(-16deg);
+}
+
+
+.row-6 {
+  transform: skew(13deg);
+}
+.seat {
+  transform: skew(-18deg);
+}
+
+
+.row-7 {
+  transform: skew(15deg);
+}
+.seat {
+  transform: skew(-20deg);
+}
+

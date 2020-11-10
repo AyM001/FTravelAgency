@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Flight} from '../model/flight';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Seat} from '../model/seat';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,11 @@ export class FlightService {
   // tslint:disable-next-line:typedef
   public update(flight: Flight){
     return this.http.put<Flight>(this.flightsUrl , flight);
+  }
+  public getSeatsLeft(id: number): Observable<Seat[]>{
+    return this.http.get<Seat[]>(`http://localhost:8080/flights/seatsL/${id}`);
+  }
+  public getSeatsRight(id: number): Observable<Seat[]>{
+    return this.http.get<Seat[]>(`http://localhost:8080/flights/seatsR/${id}`);
   }
 }
