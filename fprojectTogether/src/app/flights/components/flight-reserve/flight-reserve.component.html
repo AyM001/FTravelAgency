@@ -1,18 +1,56 @@
 <app-menu></app-menu>
 <div class="theatre">
 
-  <div class="cinema-seats left">
-    <div class="cinema-row row-1">
-      <div (click)="hideSeat()" class="seat" *ngFor="let s of seatsL">{{s.seatName}}</div>
-    </div>
+  <div class="cinema-seats left container mr-lg-5 form">
 
-  <div class="cinema-seats right">
-    <div class="cinema-row row-1">
-      <div (click)="hideSeat()" class="seat" *ngFor="let s of seatsR">{{s.seatName}}</div>
+      <div class="row">
+
+      <div (click)="hideSeat(s,'.'+s.seatName)" class="seat {{s.seatName}} col-{{numberOfSeatsStyle}}" *ngFor="let s of seatsL">
+        <h6>{{s.seatName}}</h6>
+        </div>
+      </div>
+
+  </div>
+  <div class="cinema-seats right container">
+      <div class="row">
+      <div (click)="hideSeat(s,'.seat')" class="seat col-3" *ngFor="let s of seatsR">{{s.seatName}}</div>
 
     </div>
 
   </div>
   </div>
+<form (ngSubmit)="flight" class="form-inline" *ngFor="let res of resList">
+  <div class="form-group">
+    <label for="firstName"></label>
+    <input type="text" [(ngModel)]="firstName"
+           class="form-control"
+           id="firstName"
+           name="firstName"
+           placeholder="Enter first name"
+    >
+  </div>
 
-</div>
+  <div class="form-group">
+    <label for="lastName"></label>
+    <input type="text" [(ngModel)]="lastName"
+           class="form-control"
+           id="lastName"
+           name="lastName"
+           placeholder="Enter Last name"
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="documentId"></label>
+    <input type="text" [(ngModel)]="documentId"
+           class="form-control"
+           id="documentId"
+           name="documentId"
+           placeholder="Enter the document id"
+    >
+  </div>
+
+
+</form>
+<button type="submit"
+        class="btn btn-info">Submit</button>
