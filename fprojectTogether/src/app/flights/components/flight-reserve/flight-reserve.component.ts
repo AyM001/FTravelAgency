@@ -25,12 +25,14 @@ export class FlightReserveComponent implements OnInit {
   lastName: string;
   documentId: string;
   resList: Reservationf[] = [];
+  reservation: Reservationf = new Reservationf();
 
   constructor(private router: Router,
               private flightService: FlightService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.reservation = new Reservationf();
     this.resList = [];
     this.flight = new Flight();
     this.id = this.route.snapshot.params.id;
@@ -47,85 +49,82 @@ export class FlightReserveComponent implements OnInit {
       this.seatsR = [];
       this.seatsR = data;
     });
-}
+  }
 // tslint:disable-next-line:typedef
-hideSeat(seat: Seat, event){
-  $('.seat').on('click', function(): void {
-    $(this).toggleClass('active');
-  });
-  setTimeout(() =>
-    {
-      if (this.ifSelected(event)){
-        const res: Reservationf = new Reservationf();
-        res.date = this.flight.departureDay;
-        res.seat = seat;
-        seat.reservation = res;
-        seat.flight = this.flight;
-        this.addReservation(seat.reservation);
-        console.log(seat);
+  hideSeatReserved(seat: Seat, event) {
+    if (seat.reservation !== null) {
+      if (seat.reservation.id !== undefined){
+        console.log(seat.reservation.id);
+        $(event).addClass('reserve');
       }
-      if (!this.ifSelected(event)){
-        this.deleteReservation(seat.reservation);
-        seat.reservation = null;
-        console.log('test');
-        console.log(seat);
-      }
-    },
-    3000);
+    }
+  }
+// tslint:disable-next-line:typedef
+  hideSeat(seat: Seat, event){
+      $('.seat').on('click', function(): void {
+        $(this).toggleClass('active');
+      });
+      setTimeout(() => {
+          const res: Reservationf = new Reservationf();
+          if (this.ifSelected(event)) {
+            res.date = this.flight.departureDay;
+            res.seat = seat;
+            seat.reservation = res;
+            this.addReservation(res);
+          } else if (!this.ifSelected(event)) {
+            this.deleteReservation(seat.reservation);
+            seat.reservation = null;
+          }
+        },
+        3000);
+  }
 
-}
+
 
 // tslint:disable-next-line:typedef
-test(){
-    console.log('test');
-}
-
-
-// tslint:disable-next-line:typedef
-ifSelected(event): boolean{
+  ifSelected(event): boolean{
     if ( $(event).hasClass('active')){
       return true;
     }
-}
-
-
-
+  }
 // tslint:disable-next-line:typedef
-ifIsReserved(seat: Seat){
-  $('label').on('click', function(): void {
-    if (!$(this).hasClass('reserved')) {
-      if ($(this).find('input').is(':checked')) {
-        $(this).addClass('selected');
-      } else {
-        console.log('selected');
-        $(this).removeClass('selected');
-      }
-    } else {
-      alert('Already booked');
-    }
-  });
-}
+//   ifReserved(event): boolean{
+//     if ( $(event).hasClass('reserve')){
+//       return true;
+//     }
+//   }
 
-addReservation(res: Reservationf): void{
+  addReservation(res: Reservationf): void{
     if (!this.ifResExist(res)){
       this.resList.push(res);
     }
-}
-ifResExist(res: Reservationf): boolean{
+  }
+  ifResExist(res: Reservationf): boolean{
     for (const rs of this.resList){
       if (rs.seat.id === res.seat.id) {
         return true;
       }
     }
     return false;
-}
-deleteReservation(res: Reservationf): void{
+  }
+  deleteReservation(res: Reservationf): void{
     for (let i = 0; i < this.resList.length; i++){
-    if (this.resList[i].seat === res.seat){
-      this.resList.splice(i, 1);
-    }
+      if (this.resList[i].seat === res.seat){
+        this.resList.splice(i, 1);
+      }
     }
     this.resList.forEach( item => delete item.id );
-}
+  }
+// tslint:disable-next-line:typedef
+  onSubmit(){
+    for (const res of this.resList){
+      this.flightService.saveR(res).subscribe();
+    }
+    setTimeout(() =>
+      {
+        this.router.navigate(['']);
+      },
+      2000);
+  }
 }
 
