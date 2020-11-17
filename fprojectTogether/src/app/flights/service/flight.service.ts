@@ -3,6 +3,7 @@ import {Flight} from '../model/flight';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Seat} from '../model/seat';
+import {Reservationf} from '../model/reservationf';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,9 @@ export class FlightService {
   }
   public getSeatsRight(id: number): Observable<Seat[]>{
     return this.http.get<Seat[]>(`http://localhost:8080/flights/seatsR/${id}`);
+  }
+  // tslint:disable-next-line:typedef
+  public saveR(res: Reservationf){
+    return this.http.post<Reservationf>(`http://localhost:8080/flight/reserve/seat/`, res);
   }
 }
