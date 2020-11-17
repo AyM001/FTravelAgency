@@ -22,7 +22,8 @@
 
   </div>
   </div>
-<form (ngSubmit)="onSubmit()" class="form-inline" *ngFor="let res of resList">
+<div class="container" >
+<form (ngSubmit)="onSubmit()" class="form-inline" *ngFor="let res of resList" style="margin-top: 20px">
   <div class="form-group mr-lg-3">
     <label for="firstName"></label>
     <input type="text" [(ngModel)]="res.firstName"
@@ -58,5 +59,6 @@
 
 
 </form>
-<button type="submit"
+<button *ngIf="resList.length>0" type="submit"
         class="btn btn-info" (click)="onSubmit()" style="margin-top:20px">Submit</button>
+</div>

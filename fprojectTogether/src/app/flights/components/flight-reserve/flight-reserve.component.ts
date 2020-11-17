@@ -118,6 +118,9 @@ export class FlightReserveComponent implements OnInit {
 // tslint:disable-next-line:typedef
   onSubmit(){
     for (const res of this.resList){
+      const seat: Seat = res.seat;
+      seat.reservation = null;
+      res.seat = seat;
       this.flightService.saveR(res).subscribe();
     }
     setTimeout(() =>
