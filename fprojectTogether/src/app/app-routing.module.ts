@@ -44,13 +44,20 @@ import {HotelsCustomerViewComponent} from './hotels/components/hotels-customer-v
 import {FlightsCustomerComponent} from './flights/components/flights-customer/flights-customer.component';
 import {HomepageComponent} from './common/component/homepage/homepage.component';
 import {HotelCustomerComponent} from './hotels/components/hotel-customer/hotel-customer.component';
-import {TestComponent} from './test/test/test.component';
+import {PaymentComponent} from './common/component/payment/payment.component';
+import {PaymentMessageComponent} from './common/component/payment/payment-message/payment-message.component';
+import {ContactPageComponent} from './common/component/contact-page/contact-page.component';
+import {ContactMessageComponent} from './common/component/contact-page/contact-message/contact-message.component';
 
 
 const routes: Routes = [
   {path: 'getUsers', component: UserListComponent},
-  {path: 'homepage', component: HomepageComponent},
-  {path: '', component: LoginComponent},
+  {path: 'payment', component: PaymentComponent},
+  {path: 'paymentMessage', component: PaymentMessageComponent},
+  {path: 'contact', component: ContactPageComponent},
+  {path: 'contactMessage', component: ContactMessageComponent},
+  {path: '', component: HomepageComponent},
+ // {path: '', component: LoginComponent},
   {path: 'editUser/:id', component: UserEditComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'continent', component: ContinentListComponent},
@@ -91,8 +98,7 @@ const routes: Routes = [
 {path: 'room/:id', component: RoomListComponent},
 {path: 'addRooms/:idH', component: RoomAddComponent},
 {path: 'editRoom/:id', component: RoomEditComponent},
-{path: 'menu', component: MenuComponent},
-  {path: 'test', component: TestComponent},
+{path: 'menu', component: MenuComponent}
   ];
 
 @NgModule({

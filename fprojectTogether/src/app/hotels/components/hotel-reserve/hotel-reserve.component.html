@@ -70,9 +70,11 @@
                      required #number="ngModel">
             </div>
             <div [hidden]="!number.pristine" class="alert alert-danger">Persons number is required</div>
+           <a href="/payment">
             <button type="submit" [disabled]="!datesAdded.form.valid"
                     class="btn btn-info">Submit
             </button>
+           </a>
           </form>
         </div>
       </div>

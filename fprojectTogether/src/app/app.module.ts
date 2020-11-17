@@ -71,7 +71,10 @@ import { HotelsCustomerViewComponent } from './hotels/components/hotels-customer
 import { FlightsCustomerComponent } from './flights/components/flights-customer/flights-customer.component';
 import { HomepageComponent } from './common/component/homepage/homepage.component';
 import { HotelCustomerComponent } from './hotels/components/hotel-customer/hotel-customer.component';
-import { TestComponent } from './test/test/test.component';
+import { PaymentComponent } from './common/component/payment/payment.component';
+import { PaymentMessageComponent } from './common/component/payment/payment-message/payment-message.component';
+import { ContactPageComponent } from './common/component/contact-page/contact-page.component';
+import { ContactMessageComponent } from './common/component/contact-page/contact-message/contact-message.component';
 
 
 
@@ -123,7 +126,10 @@ import { TestComponent } from './test/test/test.component';
     FlightsCustomerComponent,
     HomepageComponent,
     HotelCustomerComponent,
-    TestComponent,
+    PaymentComponent,
+    PaymentMessageComponent,
+    ContactPageComponent,
+    ContactMessageComponent,
   ],
     imports: [
         BrowserModule,
