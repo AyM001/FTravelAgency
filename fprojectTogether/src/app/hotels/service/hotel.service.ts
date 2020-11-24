@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Hotel} from '../model/hotel';
 import {Reservationh} from '../model/reservationh';
+import {Voucherh} from '../model/voucherh';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,9 @@ export class HotelService {
     return this.http.get(`${this.hotelsUrl}/photos/${id}`);
   }
   // tslint:disable-next-line:typedef
-  public reserve(id: number, dateIn: string, dateOut: string, numPers: number){
-    return this.http.post<Reservationh>(`http://localhost:8080/reserve/${id}/${dateIn}/${dateOut}/${numPers}`, null);
+  public reserve(id: number, dateIn: string, dateOut: string, numPers: number, voucher: Voucherh, username: string){
+    // tslint:disable-next-line:max-line-length
+    return this.http.post<Voucherh>(`http://localhost:8080/reserve/hotel/voucher/${id}/${dateIn}/${dateOut}/${numPers}/${username}`, voucher);
   }
+  // @PostMapping("/reserve/hotel/voucher/{id}/{dateIn}/{dateOut}/{numPers}/{username}")
 }
