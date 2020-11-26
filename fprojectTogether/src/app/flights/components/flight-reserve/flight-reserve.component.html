@@ -1,5 +1,6 @@
 <app-menu></app-menu>
-<div class="theatre">
+<div class="row">
+<div class="theatre col-md-3">
 
   <div class="cinema-seats left container mr-lg-5 form">
 
@@ -13,16 +14,18 @@
 
   </div>
   <div class="cinema-seats right container">
-      <div class="row">
-      <div (click)="hideSeat(s,'.'+s.seatName)" class="seat col-3" *ngFor="let s of seatsR">
-        <h6 >{{s.seatName}}</h6>
-      </div>
+    <div class="row">
 
+      <div  (click)="hideSeat(s,'.'+s.seatName)" class="seat {{s.seatName}} col-{{numberOfSeatsStyle}}" *ngFor="let s of seatsR" >
+        <h6 >{{s.seatName}}</h6>
+        <h6 *ngIf="hideSeatReserved(s,'.'+s.seatName)"></h6>
+      </div>
     </div>
 
   </div>
   </div>
-<div class="container" >
+</div>
+<div class="container col-md-6" style="margin-left: 500px">
 <form (ngSubmit)="open(content)" class="form-inline" *ngFor="let res of resList" style="margin-top: 20px">
   <div class="form-group mr-lg-3">
     <label for="firstName"></label>
@@ -31,7 +34,7 @@
            id="firstName"
            name="firstName"
            placeholder="Enter the first name for seat : {{res.seat.seatName}}"
-           style="width: 300px"
+           style="width: 200px"
     >
   </div>
 
@@ -42,7 +45,7 @@
            id="lastName"
            name="lastName"
            placeholder="Enter the Last name for seat : {{res.seat.seatName}}"
-           style="width: 300px"
+           style="width: 200px"
     >
   </div>
 
@@ -53,7 +56,7 @@
            id="documentId"
            name="documentId"
            placeholder="Enter the document id for seat: {{res.seat.seatName}}"
-           style="width: 300px"
+           style="width: 200px"
     >
   </div>
 
