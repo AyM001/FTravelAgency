@@ -3,13 +3,14 @@ import {Hotel} from '../../model/hotel';
 import {HotelService} from '../../service/hotel.service';
 import {CityService} from '../../../cities/service/city.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Reservationh} from '../../model/reservationh';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Voucherh} from '../../model/voucherh';
 import {VoucherhService} from '../../service/voucherh.service';
 import {User} from '../../../users/model/user';
 import {AuthService} from '../../../users/service/auth.service';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-hotel-reserve',
@@ -28,6 +29,10 @@ export class HotelReserveComponent implements OnInit {
   currentUser: User;
   isLoggedIn = false;
   packets: string[] = ['All Inclusive', 'FullBoard', 'HalfBoard' , 'Bed&Breakfast' , 'Only Bed' ];
+  packet: string;
+  voucherPacket = 'OB';
+  message = '';
+  closeResult = '';
   constructor(private hotelService: HotelService,
               private cityService: CityService,
               private router: Router,
@@ -43,6 +48,7 @@ export class HotelReserveComponent implements OnInit {
     this.currentUser.username = ''; }
 
   ngOnInit(): void {
+    this.packet = '';
     this.authService.isLoggedIn.subscribe(data => {
       this.isLoggedIn = data;
       this.currentUser = new User();
@@ -67,14 +73,39 @@ export class HotelReserveComponent implements OnInit {
     });
   }
   // tslint:disable-next-line:typedef
-  public onSubmit(){
-    this.reservation.checkInDate = this.fromDate.year + '-' + this.fromDate.month + '-' + (this.fromDate.day + 1);
-    this.reservation.checkOutDate = this.toDate.year + '-' + this.toDate.month + '-' + (this.toDate.day + 1);
+  public onSubmit(content){
+    this.addVoucherPacket();
+    this.reservation.checkInDate = this.fromDate.year + '-' + this.fromDate.month + '-' + this.fromDate.day ;
+    this.reservation.checkOutDate = this.toDate.year + '-' + this.toDate.month + '-' + this.toDate.day ;
     // tslint:disable-next-line:max-line-length
-    this.hotelService.reserve(this.id, this.reservation.checkInDate, this.reservation.checkOutDate, this.reservation.personsNumber, this.voucherh, this.currentUser.username).
+    this.hotelService.reserve(this.id, this.reservation.checkInDate, this.reservation.checkOutDate, this.reservation.personsNumber, this.voucherh, this.currentUser.username, this.voucherPacket).
     subscribe(result => {
-      this.goToHotelList();
+      this.message = result.message;
+      console.log(this.message);
+      this.open(content);
     });
+  }
+  // tslint:disable-next-line:typedef
+  gotoPage(content){
+    this.router.navigate(['reserveHotel/' + this.id]);
+  }
+  // tslint:disable-next-line:typedef
+  private addVoucherPacket(){
+    if (this.packet === 'All Inclusive') {
+      this.voucherPacket = 'AI';
+    }
+    if (this.packet === 'FullBoard'){
+      this.voucherPacket = 'FB';
+    }
+    if (this.packet === 'HalfBoard'){
+      this.voucherPacket = 'HB';
+    }
+    if (this.packet === 'Bed&Breakfast'){
+      this.voucherPacket = 'BB';
+    }
+    if (this.packet ===  'Only Bed' ){
+      this.voucherPacket = 'OB';
+    }
   }
   // tslint:disable-next-line:typedef
   goToHotelList(){
@@ -115,5 +146,23 @@ export class HotelReserveComponent implements OnInit {
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+  // tslint:disable-next-line:typedef
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 }

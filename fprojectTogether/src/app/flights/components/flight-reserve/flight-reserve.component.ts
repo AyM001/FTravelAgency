@@ -5,6 +5,7 @@ import {FlightService} from '../../service/flight.service';
 import * as $ from 'jquery';
 import {Seat} from '../../model/seat';
 import {Reservationf} from '../../model/reservationf';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -26,10 +27,11 @@ export class FlightReserveComponent implements OnInit {
   documentId: string;
   resList: Reservationf[] = [];
   reservation: Reservationf = new Reservationf();
-
+  closeResult = '';
   constructor(private router: Router,
               private flightService: FlightService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.reservation = new Reservationf();
@@ -116,18 +118,39 @@ export class FlightReserveComponent implements OnInit {
     this.resList.forEach( item => delete item.id );
   }
 // tslint:disable-next-line:typedef
-  onSubmit(){
+  onSubmit(content){
     for (const res of this.resList){
       const seat: Seat = res.seat;
       seat.reservation = null;
       res.seat = seat;
-      this.flightService.saveR(res).subscribe();
+      this.flightService.saveR(res, this.id).subscribe();
     }
     setTimeout(() =>
       {
-        this.router.navigate(['/payment']);
+        this.flightService.updateVacancies(this.id, this.resList.length).subscribe(result => {
+          this.router.navigate(['/paymentMessage']);
+        });
       },
       2000);
+  }
+
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+  // tslint:disable-next-line:typedef
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 }
 
