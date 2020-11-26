@@ -1,4 +1,9 @@
 <app-menu></app-menu>
+<div class="columns">
+  <ul class="price">
+    <li class="grey">$ {{flight.seatPrice}} / seat</li>
+  </ul>
+</div>
 <div class="row">
 <div class="theatre col-md-3">
 
@@ -33,7 +38,7 @@
            class="form-control"
            id="firstName"
            name="firstName"
-           placeholder="Enter the first name for seat : {{res.seat.seatName}}"
+           placeholder="Enter the first name: {{res.seat.seatName}}"
            style="width: 200px"
     >
   </div>
@@ -44,7 +49,7 @@
            class="form-control"
            id="lastName"
            name="lastName"
-           placeholder="Enter the Last name for seat : {{res.seat.seatName}}"
+           placeholder="Enter the Last name: {{res.seat.seatName}}"
            style="width: 200px"
     >
   </div>
@@ -55,7 +60,7 @@
            class="form-control"
            id="documentId"
            name="documentId"
-           placeholder="Enter the document id for seat: {{res.seat.seatName}}"
+           placeholder="Enter the document id: {{res.seat.seatName}}"
            style="width: 200px"
     >
   </div>
@@ -63,7 +68,7 @@
 
 </form>
 <button *ngIf="resList.length>0" type="submit"
-        class="btn btn-info" (click)="open(content)" style="margin-top:20px">Submit</button>
+        class="btn btn-info" (click)="open(content)" style="margin-top:20px">Go To Payment - Total: $ {{totalCost}}</button>
 </div>
 <ng-template #content let-modal>
   <div class="row">

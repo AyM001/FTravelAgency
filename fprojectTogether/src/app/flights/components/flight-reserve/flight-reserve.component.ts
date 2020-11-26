@@ -28,6 +28,7 @@ export class FlightReserveComponent implements OnInit {
   resList: Reservationf[] = [];
   reservation: Reservationf = new Reservationf();
   closeResult = '';
+  totalCost = 0;
   constructor(private router: Router,
               private flightService: FlightService,
               private route: ActivatedRoute,
@@ -99,6 +100,7 @@ export class FlightReserveComponent implements OnInit {
   addReservation(res: Reservationf): void{
     if (!this.ifResExist(res)){
       this.resList.push(res);
+      this.totalCost = this.flight.seatPrice * this.resList.length;
     }
   }
   ifResExist(res: Reservationf): boolean{
