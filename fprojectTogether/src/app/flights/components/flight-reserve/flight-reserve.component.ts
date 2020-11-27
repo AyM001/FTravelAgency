@@ -30,7 +30,7 @@ export class FlightReserveComponent implements OnInit {
   resList: Reservationf[] = [];
   reservation: Reservationf = new Reservationf();
   closeResult = '';
-  totalCost = 0;
+  totalCost: number;
   luggage = ['hand baggage (*max 10 kg)', 'medium luggage (*max 20 kg)', 'heavy luggage (*max 32 kg)', 'No baggage'];
   selectedLuggage: string[] = [];
   luggages: string[] = [];
@@ -38,7 +38,8 @@ export class FlightReserveComponent implements OnInit {
   constructor(private router: Router,
               private flightService: FlightService,
               private route: ActivatedRoute,
-              private modalService: NgbModal) { this.luggages = []; }
+              private modalService: NgbModal) {
+    this.luggages = []; }
 
   ngOnInit(): void {
     this.selectedLuggage = [];
@@ -90,9 +91,36 @@ export class FlightReserveComponent implements OnInit {
     res.luggage = this.luggages;
     this.luggages = [];
   }
+  calcPriceLug(res: Reservationf, c: number): number {
+    let b = 0;
+    if (res.luggage !== undefined){
+      for (const a of res.luggage) {
+        if (a === 'hand baggage (*max 10 kg)') {
+         b = 10;
+         c = b + c;
+        }
+        if (a === 'medium luggage (*max 20 kg)') {
+         b = 20;
+         c = b + c;
+        }
+        if (a === 'heavy luggage (*max 32 kg)') {
+         b = 30;
+         c = b + c;
+        }
+        if (a === 'No baggage') {
+          b = 0;
+        }
+      }
+    }
+    return c;
+  }
   verifiyIfIsCompleted(): boolean{
     for (const res of this.resList){
-      if (res.luggage.length === 0 || res.firstName === null || res.lastName === null || res.documentId === null){
+      if (res.luggage === undefined){
+        return true;
+      }
+      // tslint:disable-next-line:max-line-length
+      if (res.luggage.length === 0){
         return true;
       }
     }
@@ -133,12 +161,21 @@ export class FlightReserveComponent implements OnInit {
       return true;
     }
   }
+  // tslint:disable-next-line:typedef
+  calcTotCost(){
+    let costLug = 0;
+    for (const a of this.resList){
+      costLug = this.calcPriceLug(a, 0) + costLug;
+    }
+    this.totalCost = this.flight.seatPrice * this.resList.length;
+    this.totalCost = costLug + this.totalCost;
+  }
 
 
   addReservation(res: Reservationf): void{
     if (!this.ifResExist(res)){
       this.resList.push(res);
-      this.totalCost = this.flight.seatPrice * this.resList.length;
+      this.calcTotCost();
     }
   }
   ifResExist(res: Reservationf): boolean{
@@ -197,11 +234,13 @@ export class FlightReserveComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onItemSelect(item: any) {
     console.log(item);
+    this.calcTotCost();
   }
 
   // tslint:disable-next-line:typedef
   onSelectAll(items: any) {
     console.log(items);
+    this.calcTotCost();
   }
 }
 
