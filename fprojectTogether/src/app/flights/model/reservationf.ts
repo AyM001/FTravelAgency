@@ -6,5 +6,6 @@ export class Reservationf {
   firstName: string;
   lastName: string;
   documentId: string;
+  luggage: string[];
   seat: Seat;
 }

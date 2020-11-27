@@ -130,7 +130,13 @@ label {
   padding: 7px 0;
   font-size: 24px;
 }
-
+.drop{
+  border: none;
+  width: 630px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
 .btn {
   background-color: #4CAF50;
   color: white;

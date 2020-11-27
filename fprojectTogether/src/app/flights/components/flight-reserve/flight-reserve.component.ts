@@ -6,6 +6,8 @@ import * as $ from 'jquery';
 import {Seat} from '../../model/seat';
 import {Reservationf} from '../../model/reservationf';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Continent} from '../../../continents/model/continent';
+import {IDropdownSettings} from 'ng-multiselect-dropdown';
 
 
 
@@ -29,6 +31,9 @@ export class FlightReserveComponent implements OnInit {
   reservation: Reservationf = new Reservationf();
   closeResult = '';
   totalCost = 0;
+  luggage = ['hand baggage (*max 10 kg)', 'medium luggage (*max 20 kg)', 'heavy luggage (*max 32 kg)'];
+  selectedLuggage: string[] = [];
+  dropdownSettings: IDropdownSettings = {};
   constructor(private router: Router,
               private flightService: FlightService,
               private route: ActivatedRoute,
@@ -52,6 +57,29 @@ export class FlightReserveComponent implements OnInit {
       this.seatsR = [];
       this.seatsR = data;
     });
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+  }
+  // tslint:disable-next-line:typedef
+  addLuggage(res: Reservationf) {
+    for (const a of this.selectedLuggage) {
+      if (a === 'hand baggage (*max 10 kg)') {
+        res.luggage.push('HB');
+      }
+      if (a === 'medium luggage (*max 20 kg)') {
+        res.luggage.push('ML');
+      }
+      if (a === 'heavy luggage (*max 32 kg)') {
+        res.luggage.push('HL');
+      }
+    }
   }
 // tslint:disable-next-line:typedef
   hideSeatReserved(seat: Seat, event) {
@@ -90,12 +118,7 @@ export class FlightReserveComponent implements OnInit {
       return true;
     }
   }
-// tslint:disable-next-line:typedef
-//   ifReserved(event): boolean{
-//     if ( $(event).hasClass('reserve')){
-//       return true;
-//     }
-//   }
+
 
   addReservation(res: Reservationf): void{
     if (!this.ifResExist(res)){
@@ -125,6 +148,7 @@ export class FlightReserveComponent implements OnInit {
       const seat: Seat = res.seat;
       seat.reservation = null;
       res.seat = seat;
+      this.addLuggage(res);
       this.flightService.saveR(res, this.id).subscribe();
     }
     setTimeout(() =>
@@ -153,6 +177,16 @@ export class FlightReserveComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  // tslint:disable-next-line:typedef
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+
+  // tslint:disable-next-line:typedef
+  onSelectAll(items: any) {
+    console.log(items);
   }
 }
 
