@@ -82,7 +82,7 @@
 
 </form>
 <button *ngIf="resList.length>0" type="submit"
-        class="btn btn-info"   (click)="open(content)"  style="margin-top:20px">Go To Payment - Total: $ {{totalCost}}</button>
+        class="btn btn-info" [disabled]="verifiyIfIsCompleted()"  (click)="open(content)"  style="margin-top:20px">Go To Payment - Total: $ {{totalCost}}</button>
 </div>
 <ng-template #content let-modal>
   <div class="row">

@@ -90,6 +90,13 @@ export class FlightReserveComponent implements OnInit {
     res.luggage = this.luggages;
     this.luggages = [];
   }
+  verifiyIfIsCompleted(): boolean{
+    for (const res of this.resList){
+      if (res.luggage.length === 0 || res.firstName === null || res.lastName === null || res.documentId === null){
+        return true;
+      }
+    }
+  }
 // tslint:disable-next-line:typedef
   hideSeatReserved(seat: Seat, event) {
     if (seat.reservation !== null) {
