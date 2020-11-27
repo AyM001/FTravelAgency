@@ -31,7 +31,7 @@
   </div>
 </div>
 <div class="container col-md-6" style="margin-left: 500px">
-<form (ngSubmit)="open(content)" class="form-inline" *ngFor="let res of resList" style="margin-top: 20px">
+<form (ngSubmit)="open(content)" class="form-inline"  *ngFor="let res of resList" style="margin-top: 20px">
   <div class="form-group mr-lg-3">
     <label for="firstName"></label>
     <input type="text" [(ngModel)]="res.firstName"
@@ -70,7 +70,7 @@
       [data]="luggage"
       [placeholder]="'Select the Luggage'"
       id="continents"
-      [(ngModel)]="selectedLuggage"
+      [(ngModel)]="res.luggage"
       [ngModelOptions]="{standalone: true}"
       [settings]="dropdownSettings"
       (onSelect)="onItemSelect($event)"
@@ -79,9 +79,10 @@
     </ng-multiselect-dropdown>
   </div>
 
+
 </form>
 <button *ngIf="resList.length>0" type="submit"
-        class="btn btn-info" (click)="open(content)" style="margin-top:20px">Go To Payment - Total: $ {{totalCost}}</button>
+        class="btn btn-info"   (click)="open(content)"  style="margin-top:20px">Go To Payment - Total: $ {{totalCost}}</button>
 </div>
 <ng-template #content let-modal>
   <div class="row">

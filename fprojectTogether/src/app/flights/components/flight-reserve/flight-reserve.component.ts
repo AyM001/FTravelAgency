@@ -31,16 +31,20 @@ export class FlightReserveComponent implements OnInit {
   reservation: Reservationf = new Reservationf();
   closeResult = '';
   totalCost = 0;
-  luggage = ['hand baggage (*max 10 kg)', 'medium luggage (*max 20 kg)', 'heavy luggage (*max 32 kg)'];
+  luggage = ['hand baggage (*max 10 kg)', 'medium luggage (*max 20 kg)', 'heavy luggage (*max 32 kg)', 'No baggage'];
   selectedLuggage: string[] = [];
+  luggages: string[] = [];
   dropdownSettings: IDropdownSettings = {};
   constructor(private router: Router,
               private flightService: FlightService,
               private route: ActivatedRoute,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal) { this.luggages = []; }
 
   ngOnInit(): void {
+    this.selectedLuggage = [];
+    this.luggages = [];
     this.reservation = new Reservationf();
+    this.reservation.luggage = [];
     this.resList = [];
     this.flight = new Flight();
     this.id = this.route.snapshot.params.id;
@@ -69,23 +73,27 @@ export class FlightReserveComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   addLuggage(res: Reservationf) {
-    for (const a of this.selectedLuggage) {
+    for (const a of res.luggage) {
       if (a === 'hand baggage (*max 10 kg)') {
-        res.luggage.push('HB');
+        this.luggages.push('HB');
       }
       if (a === 'medium luggage (*max 20 kg)') {
-        res.luggage.push('ML');
+        this.luggages.push('ML');
       }
       if (a === 'heavy luggage (*max 32 kg)') {
-        res.luggage.push('HL');
+        this.luggages.push('HL');
+      }
+      if (a === 'No baggage') {
+        this.luggages.push('NL');
       }
     }
+    res.luggage = this.luggages;
+    this.luggages = [];
   }
 // tslint:disable-next-line:typedef
   hideSeatReserved(seat: Seat, event) {
     if (seat.reservation !== null) {
       if (seat.reservation.id !== undefined){
-        console.log(seat.reservation.id);
         $(event).addClass('reserve');
       }
     }
