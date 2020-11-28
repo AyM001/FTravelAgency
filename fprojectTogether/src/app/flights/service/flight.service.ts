@@ -40,7 +40,11 @@ export class FlightService {
     return this.http.get<Seat[]>(`http://localhost:8080/flights/seatsR/${id}`);
   }
   // tslint:disable-next-line:typedef
-  public saveR(res: Reservationf){
-    return this.http.post<Reservationf>(`http://localhost:8080/flight/reserve/seat/`, res);
+  public saveR(res: Reservationf, id: number){
+    return this.http.post<Reservationf>(`http://localhost:8080/voucher/${id}`, res);
+  }
+  // tslint:disable-next-line:typedef
+  public updateVacancies(id: number, vacancies: number){
+    return this.http.put<Flight>(`${this.flightsUrl}/vacancies/${id}/${vacancies}` , null);
   }
 }
