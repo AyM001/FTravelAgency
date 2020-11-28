@@ -22,10 +22,6 @@ import {CityListComponent} from './cities/components/city-list/city-list.compone
 import {CityEditComponent} from './cities/components/city-edit/city-edit.component';
 import {CityAddComponent} from './cities/components/city-add/city-add.component';
 import {AddPhotoComponent} from './photos/components/add-photo/add-photo.component';
-import {TripListComponent} from './trips/components/trip-list/trip-list.component';
-import {TripFormComponent} from './trips/components/trip-form/trip-form.component';
-import {TripEditComponent} from './trips/components/trip-edit/trip-edit.component';
-import {TripParticipantsComponent} from './trips/components/trip-participants/trip-participants.component';
 import {RoomtypeListComponent} from './roomTypes/components/roomtype-list/roomtype-list.component';
 import {RoomAddComponent} from './rooms/components/room-add/room-add.component';
 import {RoomListComponent} from './rooms/components/room-list/room-list.component';
@@ -88,10 +84,6 @@ const routes: Routes = [
   {path: 'addCity', component: CityAddComponent},
   {path: 'editCity/:id', component: CityEditComponent},
   {path: 'photos', component: AddPhotoComponent},
-{path: 'trips', component: TripListComponent},
-{path: 'addTrip', component: TripFormComponent},
-{path: 'editTrip/:id', component: TripEditComponent},
-{path: 'tripparticipants/:id', component: TripParticipantsComponent},
 {path: 'roomType', component: RoomtypeListComponent},
 {path: 'addRoomType', component: RoomtypeAddComponent},
 {path: 'editRoomType/:id', component: RoomtypeEditComponent},

@@ -8,6 +8,8 @@
             <h3>Billing Address</h3>
             <label for="fname"><i class="fa fa-user"></i> Full Name</label>
             <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+            <label for="fname"><i class="fa fa-user"></i> Mobile</label>
+            <input type="text" id="mobile" name="mobile" placeholder="111-222-333">
             <label for="email"><i class="fa fa-envelope"></i> Email</label>
             <input type="text" id="email" name="email" placeholder="john@example.com">
             <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
@@ -57,8 +59,11 @@
           </div>
 
         </div>
-        <label>
-          <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+        <label style="text-align: center">
+          <input type="checkbox" checked="checked" name="sameadr"><i> Shipping address same as billing. </i>
+        </label>
+        <label style="text-align: center">
+          <input type="checkbox" checked="checked" name="sameadr"><i> I have read and agree with the terms and conditions. </i>
         </label>
         <a href="/paymentMessage">
           <button type="button" class="btn btn-success">Continue to checkout</button>

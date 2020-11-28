@@ -33,10 +33,7 @@ import {CityListComponent} from './cities/components/city-list/city-list.compone
 import {CityAddComponent} from './cities/components/city-add/city-add.component';
 import {CityEditComponent} from './cities/components/city-edit/city-edit.component';
 import { AddPhotoComponent } from './photos/components/add-photo/add-photo.component';
-import {TripFormComponent} from './trips/components/trip-form/trip-form.component';
-import {TripListComponent} from './trips/components/trip-list/trip-list.component';
-import {TripEditComponent} from './trips/components/trip-edit/trip-edit.component';
-import {TripParticipantsComponent} from './trips/components/trip-participants/trip-participants.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {RoomtypeListComponent} from './roomTypes/components/roomtype-list/roomtype-list.component';
@@ -57,7 +54,6 @@ import {ParticipantService} from './participants/service/participant.service';
 import {PhotoService} from './photos/service/photo.service';
 import {PhotosService} from './hotels/service/photos.service';
 import {RoomTypeService} from './roomTypes/services/room-type.service';
-import {TripService} from './trips/service/trip.service';
 import {NgImageSliderModule} from 'ng-image-slider';
 import { UserListComponent } from './users/components/user-list/user-list.component';
 import { RegisterComponent } from './users/components/register/register.component';
@@ -105,10 +101,6 @@ import { ContactMessageComponent } from './common/component/contact-page/contact
     CityAddComponent,
     CityEditComponent,
     AddPhotoComponent,
-    TripListComponent,
-    TripFormComponent,
-    TripEditComponent,
-    TripParticipantsComponent,
     RoomtypeListComponent,
     RoomtypeAddComponent,
     RoomtypeEditComponent,
@@ -148,7 +140,7 @@ import { ContactMessageComponent } from './common/component/contact-page/contact
 
     ],
   providers: [HotelService , RoomService , AirportService , CityService, CountryService , FlightService
-   , ParticipantService ,  PhotoService , PhotosService , RoomTypeService , TripService , UserServiceService,
+   , ParticipantService ,  PhotoService , PhotosService , RoomTypeService  , UserServiceService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,

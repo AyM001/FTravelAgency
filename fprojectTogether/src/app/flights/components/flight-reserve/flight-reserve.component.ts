@@ -125,7 +125,7 @@ export class FlightReserveComponent implements OnInit {
     }
     setTimeout(() =>
       {
-        this.router.navigate(['/payment']);
+        this.router.navigate(['/addparticipant']);
       },
       2000);
   }
