@@ -25,6 +25,19 @@
         <div [hidden]="!password.pristine" class="alert alert-danger">Password is required</div>
       </div>
 
+      <div class="form-group">
+        <label for="userRole">USER ROLE</label>
+        <input type="text" [(ngModel)]="user.userRole"
+               class="form-control"
+               id="userRole"
+               name="userRole"
+               placeholder="Enter userRole"
+               required #userRole="ngModel">
+        <div [hidden]="!userRole.pristine" class="alert alert-danger">userRole is required</div>
+      </div>
+
+
+
 
       <div class="btn-group">
         <a (click)="goToUserList()"

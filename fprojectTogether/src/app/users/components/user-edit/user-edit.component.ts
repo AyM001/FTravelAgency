@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../../model/user';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserServiceService} from '../../service/user-service.service';
+import {IDropdownSettings} from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-user-edit',
@@ -13,6 +14,7 @@ export class UserEditComponent implements OnInit {
 
   user: User;
   id: number;
+
 
   constructor(private userService: UserServiceService,
               private route: ActivatedRoute,
